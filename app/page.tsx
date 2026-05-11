@@ -109,6 +109,8 @@ const partners = [
   { title: "本地流量合作方", text: "把本地车主流量导入高转化服务场景。" },
 ];
 
+const mobileNavItems = ["工厂体系", "空间体系", "服务能力", "合作加盟"];
+
 const publicDir = join(process.cwd(), "public");
 
 function hasAsset(src: string) {
@@ -118,17 +120,17 @@ function hasAsset(src: string) {
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#080A0D] text-[#F5F7FA]">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[rgba(16,20,26,0.78)] backdrop-blur-2xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[rgba(16,20,26,0.82)] shadow-[0_12px_42px_rgba(0,0,0,0.24)] backdrop-blur-2xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-2 py-3 sm:px-3 lg:px-4">
           <a href="#home" className="flex items-center gap-1 sm:gap-1.5" aria-label="F11 首页">
-            <span className="relative block h-[4.15rem] w-[10.2rem] overflow-hidden sm:w-[12.2rem]">
+            <span className="relative block h-[3.8rem] w-[9.1rem] overflow-hidden sm:h-[4.15rem] sm:w-[12.2rem]">
               <Image
                 src="/f11/logo/logo-black.png"
                 alt="F11 Logo"
                 width={1536}
                 height={1024}
                 priority
-                className="absolute -left-5 -top-[1.35rem] h-[7.6rem] w-auto max-w-none object-contain mix-blend-screen"
+                className="absolute -left-4 -top-[1.1rem] h-[6.9rem] w-auto max-w-none object-contain mix-blend-screen sm:-left-5 sm:-top-[1.35rem] sm:h-[7.6rem]"
               />
             </span>
             <span className="hidden items-center gap-1.5 text-sm font-black tracking-[0.16em] text-[#D9DEE6] sm:flex">
@@ -153,11 +155,24 @@ export default function Home() {
 
           <a
             href="#partner"
-            className="rounded-full border border-[#FF1E1E]/70 bg-[#E60012] px-5 py-2.5 text-sm font-bold text-white shadow-[0_0_28px_rgba(230,0,18,0.28)] transition hover:bg-[#ff1e1e]"
+            className="rounded-full border border-[#FF1E1E]/70 bg-[#E60012] px-4 py-2 text-sm font-bold text-white shadow-[0_0_28px_rgba(230,0,18,0.28)] transition hover:bg-[#ff1e1e] sm:px-5 sm:py-2.5"
           >
             加盟咨询
           </a>
         </nav>
+        <div className="border-t border-white/8 px-3 pb-3 lg:hidden">
+          <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto pt-2 [scrollbar-width:none]">
+            {mobileNavItems.map((item) => (
+              <a
+                key={item}
+                href={`#${item === "合作加盟" ? "partner" : item === "服务能力" ? "service" : item === "空间体系" ? "space" : "factory"}`}
+                className="shrink-0 rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-xs font-bold text-[#B8C0CC]"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </div>
       </header>
 
       <section id="home" className="relative min-h-screen bg-[#080A0D] pt-20">
@@ -165,19 +180,19 @@ export default function Home() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,13,0.96)_0%,rgba(8,10,13,0.78)_45%,rgba(8,10,13,0.26)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(230,0,18,0.22),transparent_26%),radial-gradient(circle_at_75%_18%,rgba(0,214,107,0.12),transparent_24%)]" />
         <div className="absolute inset-x-0 top-24 h-px bg-[#E60012] shadow-[0_0_26px_rgba(230,0,18,0.7)]" />
-        <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1fr_0.9fr] lg:px-8">
+        <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 px-5 pb-16 pt-24 sm:pt-20 lg:grid-cols-[1fr_0.9fr] lg:px-8">
           <div className="reveal max-w-3xl">
             <p className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-black tracking-[0.24em] text-[#B8C0CC] backdrop-blur-xl">
               <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_18px_rgba(0,214,107,0.9)]" />
               新能源汽车服务中心
             </p>
-            <h1 className="mt-8 text-5xl font-black leading-tight text-[#F5F7FA] sm:text-6xl lg:text-7xl">
+            <h1 className="mt-8 text-4xl font-black leading-tight text-[#F5F7FA] sm:text-6xl lg:text-7xl">
               F11 汽车养护
               <span className="block text-[#FF1E1E] drop-shadow-[0_0_24px_rgba(230,0,18,0.35)]">
                 超级工厂
               </span>
             </h1>
-            <p className="mt-6 text-2xl font-black tracking-[0.16em] text-white sm:text-3xl">
+            <p className="mt-6 text-xl font-black tracking-[0.16em] text-white sm:text-3xl">
               透明 · 高效 · 保真
             </p>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-[#D9DEE6]">
@@ -207,7 +222,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="factory" className="relative bg-[#10141A] px-5 py-24 lg:px-8">
+      <section id="factory" className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
         <GreenDots className="left-0 top-16 h-72 w-72 opacity-25" />
         <SectionShell>
           <SectionTitle
@@ -232,7 +247,7 @@ export default function Home() {
         </SectionShell>
       </section>
 
-      <section id="space" className="relative bg-[#080A0D] px-5 py-24 lg:px-8">
+      <section id="space" className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
         <SectionShell>
           <SectionTitle
             code="空间体系"
@@ -247,7 +262,7 @@ export default function Home() {
         </SectionShell>
       </section>
 
-      <section id="service" className="relative bg-[#171B22] px-5 py-24 lg:px-8">
+      <section id="service" className="relative bg-[#171B22] px-5 py-20 lg:px-8 lg:py-24">
         <GreenDots className="right-0 top-16 h-80 w-80 opacity-25" />
         <SectionShell>
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
@@ -272,7 +287,7 @@ export default function Home() {
         </SectionShell>
       </section>
 
-      <section className="relative bg-[#080A0D] px-5 py-24 lg:px-8">
+      <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
         <SectionShell>
           <SectionTitle
             code="效率模型"
@@ -287,7 +302,7 @@ export default function Home() {
         </SectionShell>
       </section>
 
-      <section id="partner" className="relative bg-[#10141A] px-5 py-24 lg:px-8">
+      <section id="partner" className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
         <GreenDots className="right-0 bottom-8 h-72 w-72 opacity-25" />
         <SectionShell>
           <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
@@ -332,7 +347,7 @@ export default function Home() {
         </SectionShell>
       </section>
 
-      <section id="contact" className="relative bg-[#080A0D] px-5 py-24 lg:px-8">
+      <section id="contact" className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
         <SectionShell>
           <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:p-10">
             <SectionTitle
@@ -428,8 +443,8 @@ function SectionTitle({
 
 function MetricCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5 shadow-[0_18px_48px_rgba(0,0,0,0.22)] backdrop-blur-xl">
-      <p className="text-3xl font-black text-[#F5F7FA]">{value}</p>
+    <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4 shadow-[0_18px_48px_rgba(0,0,0,0.22)] backdrop-blur-xl sm:p-5">
+      <p className="text-2xl font-black text-[#F5F7FA] sm:text-3xl">{value}</p>
       <p className="mt-3 text-sm font-bold text-[#B8C0CC]">{label}</p>
     </div>
   );
@@ -456,14 +471,14 @@ function SpaceCard({
         featured ? "md:col-span-2" : ""
       }`}
     >
-      <div className={`relative bg-[#171B22] ${featured ? "aspect-[16/7]" : "aspect-[16/10]"}`}>
+      <div className={`relative bg-[#171B22] ${featured ? "aspect-[16/10] sm:aspect-[16/7]" : "aspect-[16/11] sm:aspect-[16/10]"}`}>
         {hasAsset(src) ? (
           <Image
             src={src}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition duration-500 group-hover:scale-[1.03]"
+            className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
           />
         ) : (
           <MissingImage title={`${title}图片缺失`} hint={hint} />
@@ -471,9 +486,9 @@ function SpaceCard({
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,10,13,0.82),rgba(8,10,13,0.10)_58%,rgba(8,10,13,0.26))]" />
         <div className="absolute inset-x-0 top-0 h-px bg-[#E60012]" />
         <GreenDots className="right-5 top-5 h-28 w-28 opacity-45" />
-        <div className="absolute bottom-0 left-0 right-0 p-6">
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
           <p className="text-xs font-black tracking-[0.22em] text-[#00D66B]">{code}</p>
-          <h3 className="mt-3 text-2xl font-black text-white sm:text-3xl">{title}</h3>
+          <h3 className="mt-3 text-xl font-black text-white sm:text-3xl">{title}</h3>
           <p className="mt-3 text-sm font-semibold text-[#B8C0CC]">{tag}</p>
         </div>
       </div>
@@ -491,7 +506,7 @@ function ServiceCard({
   index: number;
 }) {
   return (
-    <article className="glass-card reveal flex min-h-40 flex-col justify-between p-5">
+    <article className="glass-card reveal flex min-h-36 flex-col justify-between p-5 sm:min-h-40">
       <div className="flex items-center justify-between">
         <LineIcon index={index} />
         <span className="text-xs font-black tracking-[0.18em] text-[#7D8794]">
@@ -499,7 +514,7 @@ function ServiceCard({
         </span>
       </div>
       <div className="mt-7">
-        <h3 className="text-2xl font-black text-[#F5F7FA]">{title}</h3>
+        <h3 className="text-xl font-black text-[#F5F7FA] sm:text-2xl">{title}</h3>
         <p className="mt-3 text-sm leading-6 text-[#B8C0CC]">{text}</p>
       </div>
     </article>
@@ -517,13 +532,13 @@ function DashboardCard({
 }) {
   return (
     <article className="reveal rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.035))] p-6 shadow-[0_20px_64px_rgba(0,0,0,0.25)]">
-      <div className="mb-9 flex items-center justify-between">
+      <div className="mb-7 flex items-center justify-between">
         <span className="text-xs font-black tracking-[0.22em] text-[#7D8794]">
           数据 {String(index + 1).padStart(2, "0")}
         </span>
         <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_16px_rgba(0,214,107,0.8)]" />
       </div>
-      <p className="text-4xl font-black text-[#F5F7FA]">{value}</p>
+      <p className="text-3xl font-black text-[#F5F7FA] sm:text-4xl">{value}</p>
       <p className="mt-4 text-base font-bold text-[#D9DEE6]">{label}</p>
     </article>
   );
@@ -532,20 +547,20 @@ function DashboardCard({
 function ImagePanel({ src, title, hint }: { src: string; title: string; hint: string }) {
   return (
     <div className="reveal h-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.06] shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
-      <div className="relative min-h-[420px] bg-[#171B22] lg:h-full">
+      <div className="relative min-h-[340px] bg-[#171B22] sm:min-h-[420px] lg:h-full">
         {hasAsset(src) ? (
           <Image
             src={src}
             alt={title}
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
+            className="object-cover object-center"
           />
         ) : (
           <MissingImage title={`${title}图片缺失`} hint={hint} />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,10,13,0.64),transparent_54%)]" />
-        <div className="absolute bottom-0 left-0 right-0 p-6">
+        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
           <p className="text-xs font-black tracking-[0.22em] text-[#00D66B]">
             服务场景
           </p>
@@ -571,7 +586,7 @@ function ContactItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-6 shadow-sm">
       <p className="text-sm font-black tracking-[0.22em] text-[#E60012]">{label}</p>
-      <p className="mt-5 text-xl font-black text-[#F5F7FA]">{value}</p>
+      <p className="mt-5 break-words text-lg font-black leading-7 text-[#F5F7FA] sm:text-xl">{value}</p>
     </div>
   );
 }
