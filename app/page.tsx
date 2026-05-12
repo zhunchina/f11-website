@@ -45,6 +45,10 @@ const factoryItems = [
     title: "新能源服务能力",
     text: "面向新能源时代扩展检测、养护与标准服务模型。",
   },
+  {
+    title: "新能源电池检测",
+    text: "围绕电池健康、充放电状态与高压安全建立标准检测入口。",
+  },
 ];
 
 const spaces = [
@@ -52,45 +56,73 @@ const spaces = [
     title: "科技银灰外立面",
     tag: "银灰金属 / 红色灯带 / 玻璃幕墙",
     code: "空间 01",
-    src: "/f11/storefront.png",
-    hint: "请将 storefront.png 放入 public/f11 目录",
+    src: "/images/space/storefront.png",
+    hint: "请将 storefront.png 放入 public/images/space 目录",
     featured: true,
   },
   {
     title: "客户接待中心",
     tag: "高端接待 / 透明沟通 / 车主信任",
     code: "空间 02",
-    src: "/f11/interior/reception-main.png",
-    hint: "请将 reception-main.png 放入 public/f11/interior 目录",
+    src: "/images/space/reception-main.png",
+    hint: "请将 reception-main.png 放入 public/images/space 目录",
   },
   {
     title: "工厂化车间",
     tag: "标准工位 / 透明施工 / 效率交付",
     code: "空间 03",
-    src: "/f11/workshop/workshop-main.png",
-    hint: "请将 workshop-main.png 放入 public/f11/workshop 目录",
+    src: "/images/space/workshop-main.png",
+    hint: "请将 workshop-main.png 放入 public/images/space 目录",
   },
   {
     title: "户外导视系统",
     tag: "品牌导视 / 远距识别 / 连锁形象",
     code: "空间 04",
-    src: "/f11/signage/totem-main.png",
-    hint: "请将 totem-main.png 放入 public/f11/signage 目录",
+    src: "/images/space/totem-main.png",
+    hint: "请将 totem-main.png 放入 public/images/space 目录",
   },
   {
     title: "工服形象系统",
     tag: "统一工服 / 专业识别 / 服务信任",
     code: "空间 05",
-    src: "/f11/team/gongfu.png",
-    hint: "请将 gongfu.png 放入 public/f11/team 目录",
+    src: "/images/space/gongfu.png",
+    hint: "请将 gongfu.png 放入 public/images/space 目录",
   },
 ];
 
 const services = [
-  { title: "轮胎服务", text: "检测、更换、动平衡与安全建议。" },
-  { title: "机油保养", text: "高频快保标准化交付。" },
-  { title: "洗美贴膜", text: "精洗美容、漆面护理与贴膜服务。" },
-  { title: "新能源检测", text: "面向新能源车型的基础检测能力。" },
+  {
+    title: "轮胎服务",
+    text: "检测、更换、动平衡与安全建议。",
+    src: "/images/space/workshop-main.png",
+  },
+  {
+    title: "机油保养",
+    text: "高频快保标准化交付。",
+    src: "/images/service/service-board.png",
+  },
+  {
+    title: "洗美贴膜",
+    text: "精洗美容、漆面护理与贴膜服务。",
+    src: "/images/space/reception-main.png",
+  },
+  {
+    title: "新能源检测",
+    text: "面向新能源车型的基础检测能力。",
+    src: "/images/space/storefront.png",
+  },
+  {
+    title: "新能源电池检测",
+    text: "检测电池健康、高压安全、充放电状态与续航衰减风险。",
+    src: "/images/space/totem-main.png",
+  },
+];
+
+const batteryCapabilities = [
+  "电池健康状态评估",
+  "高压系统安全检查",
+  "充放电状态检测",
+  "续航衰减风险提示",
 ];
 
 const efficiency = [
@@ -125,11 +157,11 @@ export default function Home() {
           <a href="#home" className="flex items-center gap-1 sm:gap-1.5" aria-label="F11 首页">
             <span className="relative block h-[3.8rem] w-[9.1rem] overflow-hidden sm:h-[4.15rem] sm:w-[12.2rem]">
               <Image
-                src="/f11/logo/logo-black.png"
+                src="/images/logo/f11-logo-red.png"
                 alt="F11 Logo"
                 width={1536}
                 height={1024}
-                priority
+                preload
                 className="absolute -left-4 -top-[1.1rem] h-[6.9rem] w-auto max-w-none object-contain mix-blend-screen sm:-left-5 sm:-top-[1.35rem] sm:h-[7.6rem]"
               />
             </span>
@@ -175,10 +207,11 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="home" className="relative min-h-screen bg-[#080A0D] pt-20">
+      <section id="home" className="relative min-h-screen bg-[#10141A] pt-20">
         <HeroBackground />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,13,0.96)_0%,rgba(8,10,13,0.78)_45%,rgba(8,10,13,0.26)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(230,0,18,0.22),transparent_26%),radial-gradient(circle_at_75%_18%,rgba(0,214,107,0.12),transparent_24%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,15,19,0.90)_0%,rgba(16,20,26,0.58)_46%,rgba(200,204,210,0.16)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(230,0,18,0.24),transparent_24%),radial-gradient(circle_at_78%_16%,rgba(0,214,107,0.16),transparent_24%),radial-gradient(circle_at_70%_70%,rgba(200,204,210,0.20),transparent_30%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(245,247,250,0.10)_0%,transparent_34%,rgba(8,10,13,0.72)_100%)]" />
         <div className="absolute inset-x-0 top-24 h-px bg-[#E60012] shadow-[0_0_26px_rgba(230,0,18,0.7)]" />
         <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 px-5 pb-16 pt-24 sm:pt-20 lg:grid-cols-[1fr_0.9fr] lg:px-8">
           <div className="reveal max-w-3xl">
@@ -186,8 +219,8 @@ export default function Home() {
               <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_18px_rgba(0,214,107,0.9)]" />
               新能源汽车服务中心
             </p>
-            <h1 className="mt-8 text-4xl font-black leading-tight text-[#F5F7FA] sm:text-6xl lg:text-7xl">
-              F11 汽车养护
+            <h1 className="mt-8 text-[2.6rem] font-black leading-[1.08] text-[#F5F7FA] sm:text-6xl lg:text-7xl">
+              <span className="block whitespace-nowrap">F11 汽车养护</span>
               <span className="block text-[#FF1E1E] drop-shadow-[0_0_24px_rgba(230,0,18,0.35)]">
                 超级工厂
               </span>
@@ -274,16 +307,13 @@ export default function Home() {
               />
               <div className="mt-8 grid flex-1 gap-4 sm:grid-cols-2">
                 {services.map((item, index) => (
-                  <ServiceCard key={item.title} index={index} {...item} />
+                  <ServiceCard key={item.title} index={index} title={item.title} text={item.text} />
                 ))}
               </div>
             </div>
-            <ImagePanel
-              src="/f11/service/service-board.png"
-              title="服务能力场景图"
-              hint="请将 service-board.png 放入 public/f11/service 目录"
-            />
+            <ServiceGallery />
           </div>
+          <BatteryModule />
         </SectionShell>
       </section>
 
@@ -378,7 +408,7 @@ export default function Home() {
       <footer className="border-t border-white/10 bg-[#10141A] px-5 py-10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-sm text-[#7D8794] sm:flex-row">
           <Image
-            src="/f11/logo/logo-black.png"
+            src="/images/logo/f11-logo-red.png"
             alt="F11 Logo"
             width={1536}
             height={1024}
@@ -392,14 +422,14 @@ export default function Home() {
 }
 
 function HeroBackground() {
-  const src = "/f11/storefront.png";
+  const src = "/images/space/storefront.png";
 
   if (!hasAsset(src)) {
     return (
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,#080A0D,#171B22)]">
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#10141A,#343A43)]">
         <MissingImage
           title="首页首屏门头图缺失"
-          hint="请将 storefront.png 放入 public/f11 目录"
+          hint="请将 storefront.png 放入 public/images/space 目录"
         />
       </div>
     );
@@ -410,9 +440,9 @@ function HeroBackground() {
       src={src}
       alt="F11 正前方门头图"
       fill
-      priority
+      preload
       sizes="100vw"
-      className="object-cover object-center"
+      className="object-cover object-center opacity-95 brightness-[1.18] saturate-[1.04]"
     />
   );
 }
@@ -521,6 +551,104 @@ function ServiceCard({
   );
 }
 
+function ServiceGallery() {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2 lg:min-h-[560px]">
+      {services.map((item, index) => (
+        <ServiceVisualCard key={item.title} index={index} {...item} />
+      ))}
+    </div>
+  );
+}
+
+function ServiceVisualCard({
+  title,
+  text,
+  src,
+  index,
+}: {
+  title: string;
+  text: string;
+  src: string;
+  index: number;
+}) {
+  const featured = index === 4;
+
+  return (
+    <article
+      className={`reveal group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] shadow-[0_24px_70px_rgba(0,0,0,0.24)] transition duration-300 hover:-translate-y-1 hover:border-[#00D66B]/50 hover:shadow-[0_30px_90px_rgba(0,214,107,0.12)] ${
+        featured ? "sm:col-span-2" : ""
+      }`}
+    >
+      <div className={`relative bg-[#24282D] ${featured ? "aspect-[16/7]" : "aspect-[4/3]"}`}>
+        {hasAsset(src) ? (
+          <Image
+            src={src}
+            alt={title}
+            fill
+            sizes="(max-width: 1024px) 100vw, 32vw"
+            className="object-cover object-center brightness-[0.92] saturate-[1.04] transition duration-500 group-hover:scale-[1.06] group-hover:brightness-105"
+          />
+        ) : (
+          <MissingImage title={`${title}图片缺失`} hint="请将服务图片放入 public/images 目录" />
+        )}
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,10,13,0.88),rgba(8,10,13,0.18)_58%,rgba(200,204,210,0.12))] transition duration-300 group-hover:bg-[linear-gradient(0deg,rgba(8,10,13,0.76),rgba(8,10,13,0.10)_58%,rgba(200,204,210,0.18))]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-[#E60012] opacity-70 transition group-hover:opacity-100" />
+        <GreenDots className="right-4 top-4 h-24 w-24 opacity-0 transition duration-300 group-hover:opacity-45" />
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          <p className="text-xs font-black tracking-[0.2em] text-[#00D66B]">
+            服务 {String(index + 1).padStart(2, "0")}
+          </p>
+          <h3 className="mt-3 text-xl font-black text-white sm:text-2xl">{title}</h3>
+          <p className="mt-3 max-w-lg text-sm leading-6 text-[#D9DEE6] opacity-90">{text}</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function BatteryModule() {
+  return (
+    <div className="reveal mt-8 overflow-hidden rounded-[1.5rem] border border-[#00D66B]/25 bg-[linear-gradient(135deg,rgba(200,204,210,0.13),rgba(255,255,255,0.045))] shadow-[0_28px_80px_rgba(0,0,0,0.26)]">
+      <div className="grid gap-0 lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="relative min-h-[260px] bg-[#24282D]">
+          <Image
+            src="/images/service/service-board.png"
+            alt="新能源电池检测服务能力"
+            fill
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="object-cover object-center brightness-[1.02] saturate-[1.05]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,13,0.30),rgba(8,10,13,0.76))]" />
+          <GreenDots className="left-5 top-5 h-28 w-28 opacity-55" />
+        </div>
+        <div className="relative p-6 sm:p-8 lg:p-10">
+          <p className="text-sm font-black tracking-[0.28em] text-[#00D66B]">
+            新能源电池检测
+          </p>
+          <h3 className="mt-4 text-3xl font-black leading-tight text-[#F5F7FA] sm:text-4xl">
+            把电池健康纳入标准养护入口
+          </h3>
+          <p className="mt-5 max-w-2xl text-base leading-8 text-[#D9DEE6]">
+            面向新能源车主，F11 将电池状态、高压安全和续航衰减纳入门店检测流程，帮助车主更早发现风险，也为门店建立更高价值的服务能力。
+          </p>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {batteryCapabilities.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3"
+              >
+                <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_14px_rgba(0,214,107,0.8)]" />
+                <span className="text-sm font-bold text-[#F5F7FA]">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function DashboardCard({
   value,
   label,
@@ -541,33 +669,6 @@ function DashboardCard({
       <p className="text-3xl font-black text-[#F5F7FA] sm:text-4xl">{value}</p>
       <p className="mt-4 text-base font-bold text-[#D9DEE6]">{label}</p>
     </article>
-  );
-}
-
-function ImagePanel({ src, title, hint }: { src: string; title: string; hint: string }) {
-  return (
-    <div className="reveal h-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.06] shadow-[0_24px_70px_rgba(0,0,0,0.24)]">
-      <div className="relative min-h-[340px] bg-[#171B22] sm:min-h-[420px] lg:h-full">
-        {hasAsset(src) ? (
-          <Image
-            src={src}
-            alt={title}
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-          />
-        ) : (
-          <MissingImage title={`${title}图片缺失`} hint={hint} />
-        )}
-        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,10,13,0.64),transparent_54%)]" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-          <p className="text-xs font-black tracking-[0.22em] text-[#00D66B]">
-            服务场景
-          </p>
-          <h3 className="mt-3 text-2xl font-black text-white">{title}</h3>
-        </div>
-      </div>
-    </div>
   );
 }
 
