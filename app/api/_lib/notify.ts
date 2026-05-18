@@ -1,23 +1,14 @@
 import { buildLeadText, MailPayload, requireMailEnv } from "./lead-utils";
 
 type NodemailerModule = {
-  default?: {
-    createTransport: (options: unknown) => {
-      sendMail: (message: unknown) => Promise<unknown>;
-    };
-  };
   createTransport?: (options: unknown) => {
     sendMail: (message: unknown) => Promise<unknown>;
   };
 };
 
-async function loadNodemailer() {
+function loadNodemailer() {
   try {
-    const importer = new Function("specifier", "return import(specifier)") as (
-      specifier: string,
-    ) => Promise<NodemailerModule>;
-
-    return await importer("nodemailer");
+    return require("nodemailer") as NodemailerModule;
   } catch {
     throw new Error("邮件服务依赖未安装：nodemailer");
   }
@@ -25,8 +16,8 @@ async function loadNodemailer() {
 
 export async function sendLeadMail(payload: MailPayload) {
   const env = requireMailEnv();
-  const nodemailer = await loadNodemailer();
-  const createTransport = nodemailer.createTransport ?? nodemailer.default?.createTransport;
+  const nodemailer = loadNodemailer();
+  const createTransport = nodemailer.createTransport;
 
   if (!createTransport) {
     throw new Error("邮件服务初始化失败");
