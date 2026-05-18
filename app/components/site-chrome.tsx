@@ -7,7 +7,9 @@ import { contactInfo, navItems } from "../data/site";
 const publicDir = join(process.cwd(), "public");
 
 export function hasAsset(src: string) {
-  return existsSync(join(publicDir, src.replace(/^\//, "")));
+  const assetPath = src.split(/[?#]/)[0];
+
+  return existsSync(join(publicDir, assetPath.replace(/^\//, "")));
 }
 
 export function SiteHeader() {
@@ -17,7 +19,7 @@ export function SiteHeader() {
         <Link href="/" className="flex items-center gap-1 sm:gap-1.5" aria-label="F11 首页">
           <span className="relative block h-[3.8rem] w-[9.1rem] overflow-hidden sm:h-[4.15rem] sm:w-[12.2rem]">
             <Image
-              src="/images/logo/f11-logo-red.png"
+              src="/f11/logo/logo-black.png"
               alt="F11 Logo"
               width={1536}
               height={1024}
@@ -70,7 +72,7 @@ export function SiteFooter() {
     <footer className="border-t border-white/10 bg-[#10141A] px-5 py-10">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 text-sm text-[#7D8794] sm:flex-row">
         <Image
-          src="/images/logo/f11-logo-red.png"
+          src="/f11/logo/logo-black.png"
           alt="F11 Logo"
           width={1536}
           height={1024}
@@ -84,24 +86,24 @@ export function SiteFooter() {
 
 export function FloatingContact() {
   return (
-    <div className="fixed bottom-5 right-4 z-40 flex flex-col gap-2 sm:bottom-7 sm:right-6">
+    <div className="fixed inset-x-4 bottom-4 z-40 grid grid-cols-3 gap-2 sm:inset-x-auto sm:bottom-7 sm:right-6 sm:flex sm:flex-col">
       <a
         href={`tel:${contactInfo.phone}`}
-        className="flex h-11 items-center justify-center rounded-full border border-white/12 bg-[#10141A]/88 px-4 text-sm font-black text-white shadow-[0_12px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:border-[#E60012]/70"
+        className="flex h-11 items-center justify-center rounded-full border border-white/12 bg-[#10141A]/88 px-3 text-xs font-black text-white shadow-[0_12px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:border-[#E60012]/70 sm:px-4 sm:text-sm"
       >
         电话
       </a>
       <Link
         href="/contact#wechat"
-        className="flex h-11 items-center justify-center rounded-full border border-white/12 bg-[#10141A]/88 px-4 text-sm font-black text-white shadow-[0_12px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:border-[#00D66B]/70"
+        className="flex h-11 items-center justify-center rounded-full border border-white/12 bg-[#10141A]/88 px-3 text-xs font-black text-white shadow-[0_12px_42px_rgba(0,0,0,0.28)] backdrop-blur-xl transition hover:border-[#00D66B]/70 sm:px-4 sm:text-sm"
       >
-        微信服务号
+        微信
       </Link>
       <Link
         href="/booking"
-        className="flex h-11 items-center justify-center rounded-full border border-[#FF1E1E]/70 bg-[#E60012] px-4 text-sm font-black text-white shadow-[0_0_28px_rgba(230,0,18,0.32)] transition hover:bg-[#ff1e1e]"
+        className="flex h-11 items-center justify-center rounded-full border border-[#FF1E1E]/70 bg-[#E60012] px-3 text-xs font-black text-white shadow-[0_0_28px_rgba(230,0,18,0.32)] transition hover:bg-[#ff1e1e] sm:px-4 sm:text-sm"
       >
-        预约到店
+        预约
       </Link>
     </div>
   );
@@ -109,7 +111,7 @@ export function FloatingContact() {
 
 export function PageFrame({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#080A0D] text-[#F5F7FA]">
+    <main className="min-h-screen overflow-hidden bg-[#080A0D] pb-20 text-[#F5F7FA] sm:pb-0">
       <SiteHeader />
       {children}
       <SiteFooter />
@@ -147,13 +149,15 @@ export function PageHero({
   title,
   redTitle,
   text,
-  image = "/images/space/storefront.png",
+  image = "/f11/storefront/storefront-dark-gray-render.jpg",
+  compact = false,
 }: {
   code: string;
   title: string;
   redTitle?: string;
   text: string;
   image?: string;
+  compact?: boolean;
 }) {
   return (
     <section className="relative min-h-[68vh] bg-[#10141A] px-5 pt-28 lg:px-8">
@@ -163,6 +167,7 @@ export function PageHero({
           alt={title}
           fill
           preload
+          unoptimized
           sizes="100vw"
           className="object-cover object-center opacity-70 brightness-[1.12] saturate-[1.04]"
         />
@@ -176,7 +181,11 @@ export function PageHero({
             <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_18px_rgba(0,214,107,0.9)]" />
             {code}
           </p>
-          <h1 className="mt-8 text-[2.65rem] font-black leading-[1.08] text-[#F5F7FA] sm:text-6xl lg:text-7xl">
+          <h1
+            className={`mt-8 font-black leading-[1.08] text-[#F5F7FA] ${
+              compact ? "text-[2.25rem] sm:text-5xl lg:text-6xl" : "text-[2.45rem] sm:text-6xl lg:text-7xl"
+            }`}
+          >
             {title}
             {redTitle ? (
               <span className="block text-[#FF1E1E] drop-shadow-[0_0_24px_rgba(230,0,18,0.35)]">

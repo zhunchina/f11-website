@@ -1,58 +1,77 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BatteryModule, MetricCard, ServiceCard, ServiceGallery, StoreGallery } from "./components/content-cards";
+import { ServiceCard, StoreGallery } from "./components/content-cards";
 import { GreenDots, hasAsset, LineIcon, MissingImage, PageFrame, SectionShell, SectionTitle } from "./components/site-chrome";
-import { efficiency, factoryItems, heroMetrics, partners, services } from "./data/site";
+import { factoryItems, services } from "./data/site";
+
+const standards = [
+  { title: "透明报价", text: "费用清楚展示，减少隐形消费和反复沟通。" },
+  { title: "高效交付", text: "围绕高频养护项目，提升到店服务效率。" },
+  { title: "正品保真", text: "严选用品和施工流程，保障每一次服务质量。" },
+];
+
+const homeServiceTitles = ["机油保养", "轮胎服务", "洗美贴膜", "新能源检测"];
 
 export default function Home() {
+  const homeServices = homeServiceTitles
+    .map((title) => services.find((service) => service.title === title))
+    .filter((service): service is (typeof services)[number] => Boolean(service));
+
   return (
     <PageFrame>
       <section className="relative min-h-screen bg-[#10141A] pt-20">
         <HeroBackground />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,15,19,0.90)_0%,rgba(16,20,26,0.58)_46%,rgba(200,204,210,0.16)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(230,0,18,0.24),transparent_24%),radial-gradient(circle_at_78%_16%,rgba(0,214,107,0.16),transparent_24%),radial-gradient(circle_at_70%_70%,rgba(200,204,210,0.20),transparent_30%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(245,247,250,0.10)_0%,transparent_34%,rgba(8,10,13,0.72)_100%)]" />
-        <div className="absolute inset-x-0 top-24 h-px bg-[#E60012] shadow-[0_0_26px_rgba(230,0,18,0.7)]" />
-        <div className="relative mx-auto grid min-h-[calc(100vh-5rem)] max-w-7xl items-center gap-10 px-5 pb-16 pt-24 sm:pt-20 lg:grid-cols-[1fr_0.9fr] lg:px-8">
-          <div className="reveal max-w-3xl">
-            <p className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-black tracking-[0.24em] text-[#B8C0CC] backdrop-blur-xl">
-              <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_18px_rgba(0,214,107,0.9)]" />
-              新能源汽车服务中心
-            </p>
-            <h1 className="mt-8 text-[2.6rem] font-black leading-[1.08] text-[#F5F7FA] sm:text-6xl lg:text-7xl">
-              <span className="block whitespace-nowrap">F11 汽车养护</span>
-              <span className="block text-[#FF1E1E] drop-shadow-[0_0_24px_rgba(230,0,18,0.35)]">
-                超级工厂
-              </span>
-            </h1>
-            <p className="mt-6 text-xl font-black tracking-[0.16em] text-white sm:text-3xl">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.78)_31%,rgba(0,0,0,0.34)_49%,rgba(0,0,0,0.08)_67%,rgba(0,0,0,0)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,13,0.12)_0%,transparent_44%,rgba(0,0,0,0.48)_100%)]" />
+        <div className="absolute left-0 top-24 h-px w-[42vw] bg-[linear-gradient(90deg,#E60012,rgba(230,0,18,0.28),transparent)]" />
+        <div className="relative flex min-h-[calc(100vh-5rem)] max-w-7xl items-start px-5 pb-18 pt-[24vh] sm:px-8 sm:pt-[26vh] lg:px-16 lg:pt-[28vh] xl:px-20">
+          <div className="reveal w-full max-w-[43rem] lg:w-[49%]">
+            <p className="text-2xl font-bold tracking-normal text-white sm:text-4xl lg:text-[2.25rem]">
               透明 · 高效 · 保真
             </p>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#D9DEE6]">
-              用工业化标准，重构中国汽车养护服务体验。
+            <h1 className="mt-5 text-[2.5rem] font-black leading-[1.08] text-[#F5F7FA] sm:text-6xl lg:whitespace-nowrap lg:text-[clamp(3rem,3.8vw,3.6rem)]">
+              <span className="block sm:inline">F11 汽车养护</span>
+              <span className="block sm:inline">超级工厂</span>
+            </h1>
+            <div className="mt-6 h-px w-28 bg-[#E60012] shadow-[0_0_18px_rgba(230,0,18,0.62)]" />
+            <p className="mt-6 max-w-xl text-base leading-8 text-[#D9DEE6] sm:text-lg lg:text-xl lg:leading-[1.7]">
+              以工厂级标准化，重构汽车养护新范式。
             </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-9 flex">
               <Link
                 href="/booking"
-                className="inline-flex h-12 items-center justify-center rounded-full bg-[#E60012] px-8 text-base font-black text-white shadow-[0_0_32px_rgba(230,0,18,0.34)] transition hover:bg-[#ff1e1e]"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-[#E60012] px-8 text-sm font-black text-white shadow-[0_0_26px_rgba(230,0,18,0.30)] transition hover:bg-[#ff1e1e]"
               >
-                预约到店
-              </Link>
-              <Link
-                href="/services"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.06] px-8 text-base font-black text-white backdrop-blur transition hover:border-[#00D66B]/70 hover:bg-white/[0.10]"
-              >
-                查看服务项目
+                立即预约
               </Link>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="reveal grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
-            {heroMetrics.map((item) => (
-              <MetricCard key={item.label} value={item.value} label={item.label} />
+      <section className="relative bg-[#080A0D] px-5 py-14 lg:px-8 lg:py-16">
+        <GreenDots className="right-0 top-8 h-56 w-56 opacity-20" />
+        <SectionShell>
+          <SectionTitle
+            code="F11 标准"
+            title="F11 标准"
+            text="把报价、流程和交付做清楚，让车主更放心。"
+          />
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {standards.map((item, index) => (
+              <article key={item.title} className="glass-card reveal p-6">
+                <div className="mb-8 flex items-center justify-between">
+                  <LineIcon index={index} />
+                  <span className="text-xs font-black tracking-[0.22em] text-[#7D8794]">
+                    标准 {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-black text-[#F5F7FA]">{item.title}</h3>
+                <p className="mt-4 leading-7 text-[#B8C0CC]">{item.text}</p>
+              </article>
             ))}
           </div>
-        </div>
+        </SectionShell>
       </section>
 
       <section className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
@@ -61,9 +80,9 @@ export default function Home() {
           <SectionTitle
             code="工厂体系"
             title="为什么叫超级工厂"
-            text="F11 把车间、流程、客户和交付标准整合成可复制的工业化服务系统，而不是普通汽修门店的简单装修。"
+            text="把车间、流程、工位和记录做标准，让养护过程更清楚。"
           />
-          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {factoryItems.map((item, index) => (
               <article key={item.title} className="glass-card reveal p-6">
                 <div className="mb-8 flex items-center justify-between">
@@ -85,7 +104,7 @@ export default function Home() {
           <SectionTitle
             code="空间体系"
             title="门店形象"
-            text="以银灰金属、红色灯带、玻璃幕墙和绿色点阵建立高端连锁服务中心的第一视觉识别。"
+            text="从门头、接待区到透明车间，用统一空间标准建立清楚、专业的到店体验。"
           />
           <div className="mt-10">
             <StoreGallery />
@@ -96,81 +115,47 @@ export default function Home() {
       <section className="relative bg-[#171B22] px-5 py-20 lg:px-8 lg:py-24">
         <GreenDots className="right-0 top-16 h-80 w-80 opacity-25" />
         <SectionShell>
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
-            <div className="flex flex-col">
-              <SectionTitle
-                code="服务能力"
-                title="服务项目"
-                text="围绕轮胎、保养、洗美、新能源检测与电池检测，形成高频、标准、可复制的门店服务能力。"
-              />
-              <div className="mt-8 grid flex-1 gap-4 sm:grid-cols-2">
-                {services.map((item, index) => (
-                  <ServiceCard key={item.title} index={index} title={item.title} text={item.text} />
-                ))}
-              </div>
-            </div>
-            <ServiceGallery />
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <SectionTitle
+              code="服务项目"
+              title="常用养护服务入口"
+              text="先把高频项目讲清楚，让车主快速找到需要的服务。"
+            />
+            <Link className="cta-button bg-white/[0.08]" href="/services">
+              查看全部服务
+            </Link>
           </div>
-          <BatteryModule />
-        </SectionShell>
-      </section>
-
-      <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
-        <SectionShell>
-          <SectionTitle
-            code="效率模型"
-            title="工厂效率模型"
-            text="用数据仪表盘呈现单店能力，让工位、时效、报价、客户管理和 SOP 交付成为可管理资产。"
-          />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {efficiency.map((item, index) => (
-              <article key={item.label} className="reveal rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.035))] p-6 shadow-[0_20px_64px_rgba(0,0,0,0.25)]">
-                <div className="mb-7 flex items-center justify-between">
-                  <span className="text-xs font-black tracking-[0.22em] text-[#7D8794]">
-                    数据 {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="h-2 w-2 rounded-full bg-[#00D66B] shadow-[0_0_16px_rgba(0,214,107,0.8)]" />
-                </div>
-                <p className="text-3xl font-black text-[#F5F7FA] sm:text-4xl">{item.value}</p>
-                <p className="mt-4 text-base font-bold text-[#D9DEE6]">{item.label}</p>
-              </article>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {homeServices.map((item, index) => (
+              <ServiceCard key={item.title} index={index} title={item.title} text={item.text} />
             ))}
           </div>
         </SectionShell>
       </section>
 
-      <section className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="right-0 bottom-8 h-72 w-72 opacity-25" />
+      <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
+        <GreenDots className="right-0 bottom-8 h-72 w-72 opacity-20" />
         <SectionShell>
-          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <div className="reveal">
-              <p className="text-sm font-black tracking-[0.28em] text-[#E60012]">合作加盟</p>
-              <h2 className="mt-4 text-4xl font-black leading-tight text-[#F5F7FA] sm:text-5xl">
-                开放区域合作，
-                <span className="block text-[#FF1E1E]">共建汽车养护超级工厂</span>
+          <div className="reveal rounded-[1.5rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
+            <div>
+              <p className="text-sm font-black tracking-[0.28em] text-[#E60012]">预约到店</p>
+              <h2 className="mt-4 text-3xl font-black leading-tight text-[#F5F7FA] sm:text-5xl">
+                准备到店或了解合作？
               </h2>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-[#B8C0CC]">
-                F11不是一家修理厂，而是一套可复制的汽车养护超级工厂模型。
+              <p className="mt-6 max-w-2xl text-base leading-8 text-[#B8C0CC]">
+                车主可提前预约到店，合作伙伴可提交项目沟通需求。
               </p>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                <Link className="cta-button bg-[#E60012]" href="/join">
-                  获取合作方案
-                </Link>
-                <Link className="cta-button bg-white/[0.08]" href="/contact">
-                  预约项目沟通
-                </Link>
-              </div>
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-[#7D8794]">
+                F11 香河超级工厂已开始运营，建议到店前先电话确认服务时间。
+              </p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {partners.map((item, index) => (
-                <article key={item.title} className="glass-card reveal p-6">
-                  <p className="text-xs font-black tracking-[0.22em] text-[#00D66B]">
-                    合作 {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className="mt-8 text-2xl font-black text-[#F5F7FA]">{item.title}</h3>
-                  <p className="mt-4 leading-7 text-[#B8C0CC]">{item.text}</p>
-                </article>
-              ))}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-0">
+              <Link className="cta-button bg-[#E60012]" href="/booking">
+                预约到店
+              </Link>
+              <Link className="cta-button bg-white/[0.08]" href="/join">
+                招商合作
+              </Link>
             </div>
           </div>
         </SectionShell>
@@ -180,12 +165,12 @@ export default function Home() {
 }
 
 function HeroBackground() {
-  const src = "/images/space/storefront.png";
+  const src = "/f11/bg/hero-home-dark-gray-factory.jpg";
 
   if (!hasAsset(src)) {
     return (
       <div className="absolute inset-0 bg-[linear-gradient(135deg,#10141A,#343A43)]">
-        <MissingImage title="首页首屏门头图缺失" hint="请将 storefront.png 放入 public/images/space 目录" />
+        <MissingImage title="首页首屏大图缺失" hint="请将 hero-home-dark-gray-factory.jpg 放入 public/f11/bg 目录" />
       </div>
     );
   }
@@ -196,8 +181,10 @@ function HeroBackground() {
       alt="F11 正前方门头图"
       fill
       preload
+      unoptimized
       sizes="100vw"
-      className="object-cover object-center opacity-95 brightness-[1.18] saturate-[1.04]"
+      className="object-cover opacity-95 brightness-[1.1] saturate-[1.02]"
+      style={{ objectPosition: "center right" }}
     />
   );
 }

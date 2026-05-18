@@ -12,26 +12,88 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
   return <label className="block text-sm font-black tracking-[0.12em] text-[#D9DEE6]">{children}</label>;
 }
 
-function SubmitNote({ submitted }: { submitted: boolean }) {
-  if (!submitted) return null;
+type SubmitState = "idle" | "sending" | "booking-success" | "join-success" | "error";
+
+const submitMessages: Record<Exclude<SubmitState, "idle" | "sending">, string> = {
+  "booking-success": "预约信息已提交，工作人员将尽快通过电话或微信与你确认到店时间。",
+  "join-success": "合作意向已提交，项目负责人将根据城市和合作类型与你初步沟通。",
+  error: "提交失败，请稍后重试，或直接拨打 13146385035 咨询。",
+};
+
+function SubmitNote({ state }: { state: SubmitState }) {
+  if (state === "idle" || state === "sending") return null;
 
   return (
-    <p className="rounded-xl border border-[#00D66B]/30 bg-[#00D66B]/10 px-4 py-3 text-sm font-bold text-[#D9DEE6]">
-      已完成前端校验。当前表单暂未接入后端，信息不会提交到服务器。
+    <p
+      className={`rounded-xl border px-4 py-3 text-sm font-bold text-[#D9DEE6] ${
+        state === "error" ? "border-[#E60012]/35 bg-[#E60012]/10" : "border-[#00D66B]/30 bg-[#00D66B]/10"
+      }`}
+    >
+      {submitMessages[state]}
     </p>
   );
 }
 
+const phoneRegExp = /^1[3-9]\d{9}$/;
+
+function normalizePhone(value: string) {
+  return value.trim().replace(/[\s-]+/g, "");
+}
+
+function validatePhone(form: HTMLFormElement) {
+  const phoneInput = form.elements.namedItem("phone");
+
+  if (!(phoneInput instanceof HTMLInputElement)) {
+    return false;
+  }
+
+  const normalizedPhone = normalizePhone(phoneInput.value);
+  const isValid = phoneRegExp.test(normalizedPhone);
+
+  phoneInput.setCustomValidity(isValid ? "" : "请输入有效的 11 位手机号");
+
+  if (!isValid) {
+    phoneInput.reportValidity();
+    return false;
+  }
+
+  phoneInput.value = normalizedPhone;
+  return true;
+}
+
 export function BookingForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   return (
     <form
       className="glass-card grid gap-5 p-6 sm:p-8"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
-        if (event.currentTarget.reportValidity()) {
-          setSubmitted(true);
+        const form = event.currentTarget;
+
+        if (validatePhone(form) && form.reportValidity()) {
+          setSubmitState("sending");
+
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch("/api/booking", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: formData.get("name"),
+                phone: formData.get("phone"),
+                car: formData.get("car"),
+                service: formData.get("service"),
+                time: formData.get("time"),
+                note: formData.get("note"),
+              }),
+            });
+
+            setSubmitState(response.ok ? "booking-success" : "error");
+          } catch {
+            setSubmitState("error");
+          }
         }
       }}
     >
@@ -45,11 +107,11 @@ export function BookingForm() {
           <input
             className={inputClass}
             name="phone"
+            type="tel"
             placeholder="请输入手机号"
             required
-            pattern="^1[3-9]\\d{9}$"
             inputMode="tel"
-            title="请输入 11 位中国大陆手机号"
+            onInput={(event) => event.currentTarget.setCustomValidity("")}
           />
         </FieldLabel>
         <FieldLabel>
@@ -62,11 +124,16 @@ export function BookingForm() {
             <option value="" disabled>
               请选择服务项目
             </option>
-            <option>轮胎服务</option>
+            <option>到店检查 / 服务咨询</option>
             <option>机油保养</option>
+            <option>轮胎服务</option>
             <option>洗美贴膜</option>
+            <option>制动系统</option>
+            <option>空调养护</option>
             <option>新能源检测</option>
-            <option>新能源电池检测</option>
+            <option>钣喷维修</option>
+            <option>事故车维修</option>
+            <option>其他</option>
           </select>
         </FieldLabel>
         <FieldLabel>
@@ -78,27 +145,50 @@ export function BookingForm() {
         备注
         <textarea className={textareaClass} name="note" placeholder="可填写车辆问题、到店需求或其他说明" maxLength={240} />
       </FieldLabel>
-      <SubmitNote submitted={submitted} />
+      <SubmitNote state={submitState} />
       <button
         type="submit"
+        disabled={submitState === "sending"}
         className="inline-flex h-12 w-full items-center justify-center rounded-full bg-[#E60012] px-8 text-base font-black text-white shadow-[0_0_32px_rgba(230,0,18,0.34)] transition hover:bg-[#ff1e1e] sm:w-fit"
       >
-        提交预约
+        {submitState === "sending" ? "提交中..." : "提交预约信息"}
       </button>
     </form>
   );
 }
 
 export function JoinForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   return (
     <form
       className="glass-card grid gap-5 p-6 sm:p-8"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
-        if (event.currentTarget.reportValidity()) {
-          setSubmitted(true);
+        const form = event.currentTarget;
+
+        if (validatePhone(form) && form.reportValidity()) {
+          setSubmitState("sending");
+
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch("/api/join", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: formData.get("name"),
+                phone: formData.get("phone"),
+                city: formData.get("city"),
+                type: formData.get("type"),
+                note: formData.get("note"),
+              }),
+            });
+
+            setSubmitState(response.ok ? "join-success" : "error");
+          } catch {
+            setSubmitState("error");
+          }
         }
       }}
     >
@@ -112,11 +202,11 @@ export function JoinForm() {
           <input
             className={inputClass}
             name="phone"
+            type="tel"
             placeholder="请输入联系电话"
             required
-            pattern="^1[3-9]\\d{9}$"
             inputMode="tel"
-            title="请输入 11 位中国大陆手机号"
+            onInput={(event) => event.currentTarget.setCustomValidity("")}
           />
         </FieldLabel>
         <FieldLabel>
@@ -140,12 +230,13 @@ export function JoinForm() {
         备注
         <textarea className={textareaClass} name="note" placeholder="可填写计划城市、资源情况或合作想法" maxLength={300} />
       </FieldLabel>
-      <SubmitNote submitted={submitted} />
+      <SubmitNote state={submitState} />
       <button
         type="submit"
+        disabled={submitState === "sending"}
         className="inline-flex h-12 w-full items-center justify-center rounded-full bg-[#E60012] px-8 text-base font-black text-white shadow-[0_0_32px_rgba(230,0,18,0.34)] transition hover:bg-[#ff1e1e] sm:w-fit"
       >
-        提交合作意向
+        {submitState === "sending" ? "提交中..." : "提交合作意向"}
       </button>
     </form>
   );

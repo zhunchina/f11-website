@@ -7,9 +7,9 @@ export default function BookingPage() {
       <PageHero
         code="预约到店"
         title="提前预约，"
-        redTitle="到店更高效"
-        text="填写车辆与服务需求，门店顾问可提前准备服务项目。当前预约表单暂不接后端，仅展示前端校验流程。"
-        image="/images/space/reception-main.png"
+        redTitle="到店少等待"
+        text="填写车辆和服务需求，门店顾问会提前了解情况，减少到店沟通时间。"
+        image="/f11/interior/interior-reception-dark-gray-render.jpg"
       />
 
       <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
@@ -18,9 +18,14 @@ export default function BookingPage() {
             <SectionTitle
               code="预约表单"
               title="填写到店信息"
-              text="姓名、手机号、车型、服务项目、预约时间和备注会在浏览器侧完成基础校验。"
+              text="F11 香河超级工厂已正常营业，提交后工作人员将通过电话或微信与你确认到店时间。"
             />
-            <BookingForm />
+            <div>
+              <BookingForm />
+              <p className="mt-4 text-sm leading-6 text-[#7D8794]">
+                提交即表示你同意我们通过电话或微信与你联系，仅用于本次预约与服务沟通。
+              </p>
+            </div>
           </div>
         </SectionShell>
       </section>
