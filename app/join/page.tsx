@@ -1,5 +1,5 @@
 import { JoinForm } from "../components/forms";
-import { GreenDots, PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
+import { PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
 
 const joinOffers = [
   { title: "品牌形象标准", text: "统一门头、立柱、接待区和车间视觉。" },
@@ -28,7 +28,6 @@ export default function JoinPage() {
       />
 
       <section className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="right-0 top-20 h-80 w-80 opacity-25" />
         <SectionShell>
           <SectionTitle
             code="合作支持"

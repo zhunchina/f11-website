@@ -39,8 +39,9 @@ export const spaces = [
     title: "门店立柱 / 导视标识",
     tag: "真实落地标识，提升到店识别度。",
     code: "空间 02",
-    src: "/f11/signage/signage-pylon-real-dark-gray.jpg",
-    hint: "请将 signage-pylon-real-dark-gray.jpg 放入 public/f11/signage 目录",
+    src: "/f11/signage/signage-pylon-dark-gray-render.jpg",
+    hint: "请将 signage-pylon-dark-gray-render.jpg 放入 public/f11/signage 目录",
+    imageClassName: "scale-[1.08] object-contain object-center transition duration-500 group-hover:scale-[1.1]",
   },
   {
     title: "清晰接待区",
@@ -60,8 +61,8 @@ export const spaces = [
     title: "标准维修工位",
     tag: "工位、工具和作业区域更有秩序。",
     code: "空间 05",
-    src: "/f11/workshop/workshop-transparent-dark-gray.jpg",
-    hint: "请将 workshop-transparent-dark-gray.jpg 放入 public/f11/workshop 目录",
+    src: "/f11/workshop/workshop-transparent-dark-gray2.jpg",
+    hint: "请将 workshop-transparent-dark-gray2.jpg 放入 public/f11/workshop 目录",
   },
 ];
 

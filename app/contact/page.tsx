@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ContactItem, GreenDots, PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
+import { ContactItem, PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
 import { contactInfo } from "../data/site";
 
 export default function ContactPage() {
@@ -14,7 +14,6 @@ export default function ContactPage() {
       />
 
       <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="right-0 top-16 h-80 w-80 opacity-25" />
         <SectionShell>
           <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:p-10">
             <SectionTitle

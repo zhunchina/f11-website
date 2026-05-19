@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { services, spaces } from "../data/site";
-import { GreenDots, hasAsset, LineIcon, MissingImage } from "./site-chrome";
+import { hasAsset, LineIcon, MissingImage } from "./site-chrome";
 
 export function SpaceCard({
   title,
@@ -8,6 +8,7 @@ export function SpaceCard({
   src,
   hint,
   tag,
+  imageClassName,
   featured = false,
 }: {
   title: string;
@@ -15,6 +16,7 @@ export function SpaceCard({
   src: string;
   hint: string;
   tag: string;
+  imageClassName?: string;
   featured?: boolean;
 }) {
   return (
@@ -29,15 +31,18 @@ export function SpaceCard({
             src={src}
             alt={title}
             fill
+            unoptimized
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+            className={
+              imageClassName ??
+              "object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+            }
           />
         ) : (
           <MissingImage title={`${title}图片缺失`} hint={hint} />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,10,13,0.82),rgba(8,10,13,0.10)_58%,rgba(8,10,13,0.26))]" />
         <div className="absolute inset-x-0 top-0 h-px bg-[#E60012]" />
-        <GreenDots className="right-5 top-5 h-28 w-28 opacity-45" />
         <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
           <p className="text-xs font-black tracking-[0.22em] text-[#00D66B]">{code}</p>
           <h3 className="mt-3 text-xl font-black text-white sm:text-3xl">{title}</h3>
@@ -123,7 +128,6 @@ export function ServiceVisualCard({
           <MissingImage title={`${title}图片缺失`} hint="请将服务图片放入 public/f11/service 目录" />
         )}
         <div className="absolute inset-x-0 top-0 h-px bg-[#E60012] opacity-70 transition group-hover:opacity-100" />
-        <GreenDots className="right-4 top-4 h-24 w-24 opacity-0 transition duration-300 group-hover:opacity-45" />
       </div>
       <div className="p-5">
         <p className="text-xs font-black tracking-[0.2em] text-[#00D66B]">

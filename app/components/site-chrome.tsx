@@ -174,7 +174,6 @@ export function PageHero({
       ) : null}
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,15,19,0.92)_0%,rgba(16,20,26,0.66)_48%,rgba(200,204,210,0.12)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_28%,rgba(230,0,18,0.22),transparent_24%),radial-gradient(circle_at_78%_16%,rgba(0,214,107,0.16),transparent_24%),radial-gradient(circle_at_70%_70%,rgba(200,204,210,0.18),transparent_30%)]" />
-      <GreenDots className="right-4 top-32 h-72 w-72 opacity-30" />
       <SectionShell>
         <div className="relative flex min-h-[calc(68vh-7rem)] max-w-4xl flex-col justify-center py-16">
           <p className="inline-flex w-fit items-center gap-3 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-black tracking-[0.24em] text-[#B8C0CC] backdrop-blur-xl">
@@ -197,14 +196,6 @@ export function PageHero({
         </div>
       </SectionShell>
     </section>
-  );
-}
-
-export function GreenDots({ className }: { className: string }) {
-  return (
-    <div
-      className={`pointer-events-none absolute bg-[radial-gradient(circle,#00D66B_1px,transparent_2px)] [background-size:18px_18px] ${className}`}
-    />
   );
 }
 

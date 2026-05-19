@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { StoreGallery } from "../components/content-cards";
-import { GreenDots, PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
+import { PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
 import { spaces } from "../data/site";
 
 export default function StorePage() {
@@ -16,7 +16,6 @@ export default function StorePage() {
       />
 
       <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="right-0 top-16 h-80 w-80 opacity-25" />
         <SectionShell>
           <SectionTitle
             code="空间图集"
@@ -51,7 +50,6 @@ export default function StorePage() {
       </section>
 
       <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="left-0 top-16 h-72 w-72 opacity-20" />
         <SectionShell>
           <div className="grid overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] shadow-[0_24px_80px_rgba(0,0,0,0.28)] lg:grid-cols-[1.1fr_0.9fr]">
             <div className="relative min-h-[280px] bg-[#171B22] sm:min-h-[360px]">

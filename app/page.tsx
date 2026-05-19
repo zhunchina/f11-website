@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ServiceCard, StoreGallery } from "./components/content-cards";
-import { GreenDots, hasAsset, LineIcon, MissingImage, PageFrame, SectionShell, SectionTitle } from "./components/site-chrome";
+import { hasAsset, LineIcon, MissingImage, PageFrame, SectionShell, SectionTitle } from "./components/site-chrome";
 import { factoryItems, services } from "./data/site";
 
 const standards = [
@@ -50,7 +50,6 @@ export default function Home() {
       </section>
 
       <section className="relative bg-[#080A0D] px-5 py-14 lg:px-8 lg:py-16">
-        <GreenDots className="right-0 top-8 h-56 w-56 opacity-20" />
         <SectionShell>
           <SectionTitle
             code="F11 标准"
@@ -75,7 +74,6 @@ export default function Home() {
       </section>
 
       <section className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="left-0 top-16 h-72 w-72 opacity-25" />
         <SectionShell>
           <SectionTitle
             code="工厂体系"
@@ -113,7 +111,6 @@ export default function Home() {
       </section>
 
       <section className="relative bg-[#171B22] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="right-0 top-16 h-80 w-80 opacity-25" />
         <SectionShell>
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <SectionTitle
@@ -134,7 +131,6 @@ export default function Home() {
       </section>
 
       <section className="relative bg-[#080A0D] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="right-0 bottom-8 h-72 w-72 opacity-20" />
         <SectionShell>
           <div className="reveal rounded-[1.5rem] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.28)] sm:p-10 lg:flex lg:items-center lg:justify-between lg:gap-10">
             <div>

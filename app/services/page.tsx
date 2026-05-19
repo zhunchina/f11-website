@@ -1,5 +1,5 @@
 import { ServiceVisualCard } from "../components/content-cards";
-import { GreenDots, PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
+import { PageFrame, PageHero, SectionShell, SectionTitle } from "../components/site-chrome";
 import { services } from "../data/site";
 
 export default function ServicesPage() {
@@ -14,7 +14,6 @@ export default function ServicesPage() {
       />
 
       <section className="relative bg-[#10141A] px-5 py-20 lg:px-8 lg:py-24">
-        <GreenDots className="left-0 top-12 h-72 w-72 opacity-25" />
         <SectionShell>
           <SectionTitle
             code="核心项目"
